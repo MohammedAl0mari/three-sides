@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three Sides</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Three Sides</h1>
+      <div class="controls">
+        <label>Players
+          <select id="playerCount">
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </label>
+        <label>Board
+          <select id="boardSize">
+            <option value="3">Small</option>
+            <option value="4" selected>Standard</option>
+            <option value="5">Large</option>
+            <option value="6">Extra large</option>
+          </select>
+        </label>
+        <button id="newGame" type="button">New game</button>
+        <button id="undo" type="button">Undo</button>
+      </div>
+    </header>
+
+    <section class="online" aria-label="Online play">
+      <div id="onlineIdle" class="online-row">
+        <button id="createRoom" type="button">Create online room</button>
+        <span class="join">
+          <input id="roomInput" type="text" placeholder="Room code" maxlength="5"
+                 autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Room code">
+          <button id="joinRoom" type="button">Join</button>
+        </span>
+      </div>
+      <div id="onlineActive" class="online-row" hidden>
+        <span class="room">Room <strong id="roomCode"></strong></span>
+        <span id="onlineInfo" class="online-info"></span>
+        <button id="shareRoom" type="button">Invite</button>
+        <button id="startOnline" type="button">Start game</button>
+        <button id="leaveRoom" type="button">Leave</button>
+      </div>
+      <p id="onlineNote" class="online-note" aria-live="polite"></p>
+    </section>
+
+    <div id="scores" class="scores"></div>
+    <p id="status" class="status" aria-live="polite"></p>
+
+    <div class="board-wrap">
+      <svg id="board" role="group" aria-label="Game board"></svg>
+    </div>
+    <p id="remaining" class="remaining"></p>
+
+    <details class="rules">
+      <summary>How to play</summary>
+      <ul>
+        <li>On your turn, click a dot, then click one of the highlighted dots to draw a straight line between them. A line can cover 1, 2 or 3 segments.</li>
+        <li>A line may not run over a segment that is already drawn.</li>
+        <li>If your line closes the third side of one or more small triangles, you claim them all.</li>
+        <li>Play then passes to the next player, <strong>whether or not you closed a triangle</strong>.</li>
+        <li>The game ends when every segment is drawn. The player with the most triangles wins.</li>
+        <li><strong>Online:</strong> one player creates a room and shares the code or invite link. Up to three friends join from their own devices, then the host starts the game. Each device controls one colour.</li>
+      </ul>
+    </details>
+  </main>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
